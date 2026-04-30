@@ -1,22 +1,41 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useState, useRef } from 'react';
 import WordsPullUp from './animations/WordsPullUp';
 
 export default function Hero() {
-  const navItems = ['Our Story', 'Portfolio', 'Team', 'Services', 'Contact'];
+  const navItems = [' Story', 'Portfolio', 'Team', 'Services', 'Contact'];
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleVideoLoad = () => {
+    setVideoLoaded(true);
+  };
 
   return (
     <section className="h-screen p-4 md:p-6 bg-black">
       <div className="relative h-full rounded-2xl md:rounded-[2rem] overflow-hidden">
         {/* Background Video */}
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
+          onLoadedData={handleVideoLoad}
           className="absolute inset-0 w-full h-full object-cover md:object-[center_65%]"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260429_182501_0216c2be-1b2f-40d3-8716-0d4f42e73b44.mp4"
         />
+
+        {/* Loading Overlay - Shows until video is loaded */}
+        {!videoLoaded && (
+          <div className="absolute inset-0 bg-black z-30 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-12 h-12 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              <p className="text-primary text-sm">Loading...</p>
+            </div>
+          </div>
+        )}
 
         {/* Noise Overlay */}
         <div className="noise-overlay opacity-[0.7]" />
