@@ -4,7 +4,13 @@ import { useState, useRef } from 'react';
 import WordsPullUp from './animations/WordsPullUp';
 
 export default function Hero() {
-  const navItems = [' Story', 'Portfolio', 'Team', 'Services', 'Contact'];
+  const navItems = [
+    { label: 'Story', href: '#story' },
+    { label: 'Portfolio', href: '#portfolio' },
+    { label: 'Team', href: '#team' },
+    { label: 'Services', href: '#services' },
+    { label: 'Contact', href: '#contact' },
+  ];
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -12,8 +18,16 @@ export default function Hero() {
     setVideoLoaded(true);
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
-    <section className="h-screen p-4 md:p-6 bg-black">
+    <section id="home" className="h-screen p-4 md:p-6 bg-black">
       <div className="relative h-full rounded-2xl md:rounded-[2rem] overflow-hidden">
         {/* Background Video */}
         <video
@@ -48,15 +62,16 @@ export default function Hero() {
           <div className="bg-black rounded-b-2xl md:rounded-b-3xl px-4 py-2 md:px-8">
             <ul className="flex items-center gap-3 sm:gap-6 md:gap-12 lg:gap-14">
               {navItems.map((item) => (
-                <li key={item}>
+                <li key={item.label}>
                   <a
-                    href="#"
-                    className="text-[10px] sm:text-xs md:text-sm transition-colors"
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="text-[10px] sm:text-xs md:text-sm transition-colors cursor-pointer"
                     style={{ color: 'rgba(225, 224, 204, 0.8)' }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = '#E1E0CC')}
                     onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(225, 224, 204, 0.8)')}
                   >
-                    {item}
+                    {item.label}
                   </a>
                 </li>
               ))}

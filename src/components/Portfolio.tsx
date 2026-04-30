@@ -91,7 +91,7 @@ export default function Portfolio() {
   ];
 
   return (
-    <section className="bg-black py-16 md:py-24 lg:py-32 px-4 md:px-6">
+    <section id="portfolio" className="bg-black py-16 md:py-24 lg:py-32 px-4 md:px-6 scroll-mt-20">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12 md:mb-16 lg:mb-20">

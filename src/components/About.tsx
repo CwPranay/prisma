@@ -16,7 +16,7 @@ export default function About() {
   const characters = bodyText.split('');
 
   return (
-    <section className="bg-black py-16 md:py-24 lg:py-32 px-4 md:px-6">
+    <section id="story" className="bg-black py-16 md:py-24 lg:py-32 px-4 md:px-6 scroll-mt-20">
       <div className="max-w-6xl mx-auto">
         <div className="bg-[#101010] rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 text-center">
           {/* Label */}
